@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 const navigation = [
   {
@@ -40,7 +41,7 @@ function Sidebar() {
   return (
     <div className="flex h-screen bg-gray-200">
       {/* Static sidebar for desktop */}
-      <div className="flex flex-col w-56 bg-blue-900 p-4 rounded-e-lg">
+      <div className="flex flex-col w-40 bg-blue-900 p-4 rounded-e-xl">
         <div className="flex items-center flex-shrink-0 px-4">
           <img
             className="h-10 w-56"
@@ -84,10 +85,53 @@ function Sidebar() {
 }
 
 function MainContent() {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = data => {
+    console.log(data);
+  };
+
   return (
     <div className="flex-1 p-6 bg-white">
       <h1 className="text-2xl p-7 font-semibold italic text-gray-900">TRP SYSTEM</h1>
-      {/* Add your main content here */}
+      
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col items-center">
+            <div className="flex items-center justify-center w-full mb-4">
+              <div className="bg-white p-4 rounded-lg shadow-md w-1/4 mr-2">
+                <h3 className="text-lg font-semibold mb-2">Section 3</h3>
+                <input 
+                  {...register("section3")} 
+                  className="form-input mt-1 block w-full" 
+                  placeholder="Input for section 3" 
+                />
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md w-1/2">
+                <h3 className="text-lg font-semibold mb-2">Section 1</h3>
+                <p className="mt-1">This is an announcement for all users. Please read carefully.</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md w-1/4 ml-2">
+                <h3 className="text-lg font-semibold mb-2">Section 4</h3>
+                <input 
+                  {...register("section4")} 
+                  className="form-input mt-1 block w-full" 
+                  placeholder="Input for section 4" 
+                />
+              </div>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-md mb-4 w-1/2">
+              <h3 className="text-lg font-semibold mb-2">Section 2</h3>
+              <input 
+                {...register("section2")} 
+                className="form-input mt-1 block w-full" 
+                placeholder="Input for section 2" 
+              />
+            </div>
+            <div className="mt-4">
+              <button type="submit" className="bg-blue-500 text-white p-2 rounded-lg shadow-lg">
+                Submit
+              </button>
+            </div>
+          </form>
     </div>
   );
 }
